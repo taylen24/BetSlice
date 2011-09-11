@@ -1,0 +1,33 @@
+<h1>Listing bets</h1>
+
+<table>
+  <tr>
+		<th>Id</th>
+		<th>User</th>
+		<th>Title</th>
+		<th>Description</th>
+		<th>Options</th>
+		<th>Expires at</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @bets.each do |bet| %>
+  <tr>
+		<td><%= bet.id %></td>
+		<td><%= bet.user.login %></td>
+		<td><%= bet.title %></td>
+		<td><%= bet.description %></td>
+		<td><%= bet.bet_options.map(&:label).join(', ') %></td>
+		<td><%= bet.expires_at %></td>
+    <td><%= link_to 'Show', bet %></td>
+    <td><%= link_to 'Edit', edit_bet_path(bet) %></td>
+    <td><%= link_to 'Destroy', bet, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Bet', new_bet_path %>

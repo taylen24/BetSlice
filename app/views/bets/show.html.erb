@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<dl>
+	<dt>Id</dt>
+	<dd><%= @bet.id %></dd>
+	<dt>User</dt>
+	<dd><%= @bet.user.login %><dd>
+	<dt>Title</dt>
+	<dd><%= @bet.title %><dd>
+	<dt>Description</dt>
+	<dd><%= @bet.description %><dd>
+	<dt>Expires_at</dt>
+	<dd><%= @bet.expires_at %><dd>
+	<% if @bet.active? %>
+		<dt>Place Bet</dt>
+		<dd><%= render :partial => "wagers/form", :locals => {:wager => @bet.wagers.build} %><dd>
+	<% else %>
+		<dt>Options</dt>
+		<dd>
+			<% @bet.bet_options.each do |o| %>
+				<span <%="style='font-weight:bold;'" if o.win? %>><%= o.label %></span> <%="(#{o.wagers.map(&:amount).inject(:+) || 0} waged credits)" %> <br/>
+			<% end %>
+		</dd>
+	<% end %>
+	<% %>
+</dl>
+
+<% if @bet.user == current_user %>
+	<%= link_to 'Report Result', edit_bet_path(@bet) %> |
+<% end %>
+<%= link_to 'Back', bets_path %> |
+<%= link_to 'See Wagers', bet_wagers_path(@bet) %>

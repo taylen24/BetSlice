@@ -1,0 +1,30 @@
+<%= form_for @bet do |f| %>
+  <% if @bet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bet.errors.count, "error") %> prohibited this bet from being saved:</h2>
+
+      <ul>
+      <% @bet.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+	  <%= f.label :title %><br />
+	  <%= f.text_field :title %><br />
+	  <br />
+	  <%= f.label :description %><br />
+	  <%= f.text_area :description, :rows => 5, :cols => 50 %><br />
+	  <br />
+	  <%= f.label :expires_at %><br />
+	  <%= f.text_field :expires_at %><br />
+	  <br />
+		<%= f.fields_for :bet_options do |bet_option_fields| %>
+		  <%= bet_option_fields.label :label, "Option" %><br />
+		  <%= bet_option_fields.text_field :label %><br />
+    <% end %>
+		<%= f.submit "Save" %>
+  </div>
+<% end %>

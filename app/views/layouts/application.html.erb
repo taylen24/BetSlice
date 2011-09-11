@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Website</title>
+  <title>BetSlice</title>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
+<a href="/" style="font-size:40px; width:400px; font-weight:bold; height:50px;line-height:50px;text-decoration:none;">BetSlice</a><br/>
+<% if current_user.present? %>
+	<%= current_user.login %> | <%= current_user.points %> points | <%=link_to "Logout", user_session_url, :method => :delete %>
+<% end %>
 <%= yield %>
 
 </body>

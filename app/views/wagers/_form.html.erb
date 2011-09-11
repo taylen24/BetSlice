@@ -1,0 +1,21 @@
+<% wager ||= @wager %>
+
+<% if wager.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(wager.errors.count, "error") %> prohibited this bet from being saved:</h2>
+
+    <ul>
+    <% wager.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for wager, :url => {:controller => :wagers, :action => :create, :bet_id => @bet.id}, :method => :post do |f| %>
+	<% @bet.bet_options.each do |bet_option| %>
+		<%= f.radio_button 'bet_option_id', bet_option.id %><%= f.label "wager_bet_option_id_#{bet_option.id}", "#{bet_option.label} (#{bet_option.wagers.map(&:amount).inject(:+) || 0} waged credits)" %><br/>
+	<% end %>
+	Bet Amount: <%= f.text_field :amount, :value => 5 %> credits<br/>
+	<%= f.submit 'Place Bet' %>
+<% end %>

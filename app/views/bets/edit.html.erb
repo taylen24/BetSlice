@@ -1,0 +1,12 @@
+<h1>Report Bet Result</h1>
+
+<%= form_for @bet do |f| %>
+	<% @bet.bet_options.each do |bet_option| %>
+		<%= f.radio_button 'winning_option', bet_option.id %><%= f.label "winning_option_#{bet_option.id}", "#{bet_option.label} (#{bet_option.wagers.map(&:amount).inject(:+) || 0} waged credits)" %><br/>
+	<% end %>
+	<%= f.submit 'Report Result' %>
+	
+<% end %>
+
+<%= link_to 'Show', @bet %> |
+<%= link_to 'Back', bets_path %>

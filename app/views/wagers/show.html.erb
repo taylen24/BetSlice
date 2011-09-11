@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<dl>
+			<dt>User</dt>
+	    <dd><%= @wager.user.login %></dd>
+			<dt>Option</dt>
+	    <dd><%= @wager.bet_option.label %></dd>
+			<dt>Amount</dt>
+	    <dd><%= @wager.amount %></dd>
+	
+</dl>
+
+<%= link_to 'Back', bet_wagers_path(@bet.id) %>
