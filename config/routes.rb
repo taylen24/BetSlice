@@ -1,4 +1,6 @@
 Website::Application.routes.draw do
+	
+	root /
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
