@@ -1,0 +1,7 @@
+<table>
+	<% @users.each do |user| %>
+	<tr>
+		<td><%= link_to user.login, user %></td>
+	</tr>
+	<% end %>
+</table>

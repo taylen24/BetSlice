@@ -1,8 +1,10 @@
-<h1>Dashboard</h1>
+<h1><%="#{@user.login}'s"%> Profile</h1>
+
+<%=@user.points%> Points
 
 <h2>Bets</h2>
 <table>
-	<% current_user.bets.active.each do |bet| %>
+	<% @user.bets.active.each do |bet| %>
 		<tr>
 			<td><%= link_to bet.title, bet %></td>
 			<td><%= bet.wagers.map(&:amount).inject(:+) %> total credits waged</td>
@@ -17,13 +19,24 @@
 
 <h2>Active Wagers</h2>
 <table>
-	<% (current_user.wagers.select{|w| w.active?}).each do |wager| %>
+	<% (@user.wagers.select{|w| w.active?}).each do |wager| %>
 		<tr>
 			<td><%= link_to wager.bet.title, wager.bet %></td>
 			<td><%= wager.bet.wagers.map(&:amount).inject(:+) %> total credits waged</td>
-			<td><%= wager.amount %> waged by you</td>
+			<td><%= wager.amount %> waged by this user</td>
 		</tr>
 	<% end %>
 </table>
 
-<%= link_to 'Edit', edit_account_path %>
+<h2>Past Wagers</h2>
+<table>
+	<% (@user.wagers.reverse.select{|w| !w.active?}).each do |wager| %>
+		<tr <%="style='font-weight:bold;'" if wager.win? %>>
+			<td><%= link_to wager.bet.title, wager.bet %></td>
+			<td><%= wager.amount %> waged by this user</td>
+			<td><%= wager.win? ? "WIN (+#{wager.win_amount} credits)" : "LOSS" %></td>
+		</tr>
+	<% end %>
+</table>
+
+<%= link_to 'Back', users_path %>

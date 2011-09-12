@@ -16,28 +16,62 @@ class Bet < ActiveRecord::Base
   end
   
   def report_result!(option_id, current_user)
-    return false unless user == current_user || winning_option_id.blank?
+    return false unless user == current_user && winning_option_id.blank? && option_id.present?
     self.winning_option_id = option_id
     self.expires_at = DateTime.now if active?
-    result = self.save!
+    self.save!
     
-    total_loss_credits = 0
-    total_win_credits = 0
+    #Calculate all totals
+    totals = {}
+    self.wagers.each do |wager|
+      totals[wager.bet_option.id] ||= 0
+      totals[wager.bet_option.id] += wager.amount
+    end
     
+    #Calculate winning total
+    winning_total = totals[winning_option_id] || 0
+    
+    #Refund wager totals down to winning total in input ratio
     self.wagers.each do |wager|
       if wager.win?
-        total_win_credits += wager.amount
+        wager.refund = wager.amount
       else
-        total_loss_credits += wager.amount
-      end
-    end
-    if total_win_credits > 0
-      self.wagers.each do |wager|
-        if wager.win?
-          wager.user.points += ((total_loss_credits.to_f / total_win_credits.to_f) * wager.amount.to_f).floor
-          wager.user.save!
+        if totals[winning_option_id] < totals[wager.bet_option.id]
+          wager.refund = ((wager.amount.to_f / totals[wager.bet_option.id].to_f) * (totals[wager.bet_option.id].to_f - totals[winning_option_id].to_f)).floor
+        else
+          wager.refund = 0
         end
       end
+      wager.save!
+      wager.user.points += wager.refund
+      wager.user.save!
     end
+    
+    #Drop totals down to accomodate refunds (we do this in a second step so we can use floor in the previous each statement)
+    #also calc win/loss totals
+    total_win = 0
+    total_loss = 0
+    totals.each do |key, value|
+      totals[key] = totals[winning_option_id] if value > totals[winning_option_id]
+      total_win += totals[key] if key == winning_option_id
+      total_loss += totals[key] unless key == winning_option_id
+    end
+
+    #calc win per credit
+    self.win_per_credit = total_loss.to_f / total_win.to_f rescue 0
+    result = self.save!
+
+    #update wager win amounts and assign points
+    self.wagers.each do |wager|
+      if wager.win?
+        wager.win_amount = (win_per_credit * wager.amount).floor
+        wager.user.points += wager.win_amount
+        wager.user.save!
+      else
+        wager.win_amount = -wager.amount
+      end
+      wager.save!
+    end
+
   end
 end

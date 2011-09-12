@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110911093211) do
+ActiveRecord::Schema.define(:version => 20110912004106) do
 
   create_table "bet_options", :force => true do |t|
     t.integer  "bet_id"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20110911093211) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "winning_option_id"
+    t.float    "win_per_credit"
   end
 
   create_table "sessions", :force => true do |t|
@@ -67,6 +68,8 @@ ActiveRecord::Schema.define(:version => 20110911093211) do
     t.integer  "amount"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "win_amount"
+    t.integer  "refund"
   end
 
 end

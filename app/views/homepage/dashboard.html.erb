@@ -1,2 +1,29 @@
-<h1>Homepage#dashboard</h1>
-<p>Find me in app/views/homepage/dashboard.html.erb</p>
+<h1>Dashboard</h1>
+
+<h2>Bets</h2>
+<table>
+	<% current_user.bets.active.each do |bet| %>
+		<tr>
+			<td><%= link_to bet.title, bet %></td>
+			<td><%= bet.wagers.map(&:amount).inject(:+) %> total credits waged</td>
+			<td><%= link_to bet.wagers.count %> total wagers</td>
+			<td><%= content_tag :span, "Expired", :class => "expired" unless bet.active? %></td>
+		</tr>
+	<% end %>
+</table>
+
+<%= link_to 'See All Bets', bets_path %> | <%= link_to 'New Bet', new_bet_path %>
+
+
+<h2>Active Wagers</h2>
+<table>
+	<% (current_user.wagers.select{|w| w.active?}).each do |wager| %>
+		<tr>
+			<td><%= link_to wager.bet.title, wager.bet %></td>
+			<td><%= wager.bet.wagers.map(&:amount).inject(:+) %> total credits waged</td>
+			<td><%= wager.amount %> waged by you</td>
+		</tr>
+	<% end %>
+</table>
+
+<%= link_to 'Edit', edit_account_path %>

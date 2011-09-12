@@ -6,10 +6,10 @@ class Wager < ActiveRecord::Base
   
   validates_presence_of :user_id, :amount, :bet_id, :bet_option_id
   validate :check_user_has_credits
-  validate :check_bet_active
   
   validates :amount, :numericality => {:greater_than => 0}
     
+  before_create :check_bet_active
   after_create :deduct_user_points
   
   def active?

@@ -5,6 +5,10 @@
 		<th>User</th>
 		<th>Option</th>
 		<th>Amount</th>
+		<% if !@bet.active? %>
+			<th>Refund</th>
+			<th>Win Amount</th>
+		<% end %>
     <th></th>
   </tr>
 
@@ -14,6 +18,10 @@
     <td><%= wager.bet_option.label %></td>
     <td><%= wager.amount %></td>
     <td><%= link_to 'Show', bet_wager_path(@bet.id, wager.id) %></td>
+		<% if !@bet.active? %>
+			<td><%= wager.refund %></td>
+			<td><%= wager.win_amount %></td>
+		<% end %>
   </tr>
 <% end %>
 </table>

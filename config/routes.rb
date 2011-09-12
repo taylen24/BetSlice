@@ -1,15 +1,15 @@
 Website::Application.routes.draw do
 
-  get "homepage/index"
-  get "homepage/dashboard"
+  get "dashboard" => "homepage#dashboard"
 
   resources :bets do
     resources :wagers, :only =>[:index, :show, :new, :create]
   end
-  resource :account, :controller => "users"
+  resource :account, :controller => "users", :only => [:show, :new, :create, :destroy, :edit, :update]
   resource :user_session
+  resources :users, :only => [:index, :show]
   
-  root :controller => "user_sessions", :action => "new"
+  root :controller => "homepage", :action => "index"
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -7,6 +7,13 @@
 	    <dd><%= @wager.bet_option.label %></dd>
 			<dt>Amount</dt>
 	    <dd><%= @wager.amount %></dd>
+
+			<% if !@wager.bet.active? %>
+			<dt>Refund</dt>
+	    <dd><%= @wager.refund %></dd>
+			<dt>Win/Loss Amount</dt>
+	    <dd><%= @wager.win_amount %></dd>
+			<% end %>
 	
 </dl>
 
