@@ -5,7 +5,7 @@ Website::Application.routes.draw do
   resources :bets do
     resources :wagers, :only =>[:index, :show, :new, :create]
   end
-  resource :account, :controller => "users", :only => [:show, :new, :create, :destroy, :edit, :update]
+  resource :account, :controller => "users", :only => [:new, :create, :destroy, :edit, :update]
   resource :user_session
   resources :users, :only => [:index, :show]
   
