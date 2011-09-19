@@ -45,6 +45,6 @@ class BetsController < ApplicationController
   def destroy
     @bet = Bet.find(params[:id])
     @bet.destroy
-    redirect_to :index, notice: 'Bet was successfully deleted.'
+    redirect_to action: "index", notice: 'Bet was successfully deleted.'
   end
 end

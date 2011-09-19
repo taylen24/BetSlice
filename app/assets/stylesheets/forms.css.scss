@@ -1,0 +1,35 @@
+dl {
+	* {
+		vertical-align:middle;
+	}
+	background-color:#D9FFBA;
+	font-size:13px;
+	overflow:hidden;
+	@include border-radius(10px);
+	padding:15px 0px;
+	width:100%;
+	dt {
+		width: 180px;
+		float: left;
+		text-align: right;
+		clear:both;
+		padding:0px;
+		padding-right:20px;
+		line-height:23px;
+		margin-left:15px;
+	}
+	dd {
+		float:left;
+		margin:0px;
+		padding:0px;
+		line-height:23px;
+	}
+}
+
+input[type=text], input[type=password], textarea {
+	border:0px none;
+	padding:3px;
+	width:336px;
+	line-height:17px;
+	font-size:13px;
+}

@@ -11,20 +11,19 @@
     </div>
   <% end %>
 
-  <div class="actions">
-	  <%= f.label :title %><br />
-	  <%= f.text_field :title %><br />
-	  <br />
-	  <%= f.label :description %><br />
-	  <%= f.text_area :description, :rows => 5, :cols => 50 %><br />
-	  <br />
-	  <%= f.label :expires_at %><br />
-	  <%= f.text_field :expires_at %><br />
-	  <br />
+  <dl class="actions">
+	  <dt><%= f.label :title %></dt>
+	  <dd><%= f.text_field :title %></dd>
+	  <dt><%= f.label :description %></dt>
+	  <dd><%= f.text_area :description, :rows => 5, :cols => 50 %></dd>
+	  <dt><%= f.label :expires_at %></dt>
+	  <dd><%= f.text_field :expires_at %></dd>
+		<% i = 0 %>
 		<%= f.fields_for :bet_options do |bet_option_fields| %>
-		  <%= bet_option_fields.label :label, "Option" %><br />
-		  <%= bet_option_fields.text_field :label %><br />
+		  <dt><%= bet_option_fields.label :label, "Option #{i=i+1}" %></dt>
+		  <dd><%= bet_option_fields.text_field :label %></dd>
     <% end %>
-		<%= f.submit "Save" %>
-  </div>
+		<dt></dt>
+		<dd><%= f.submit "Save" %></dd>
+  </dl>
 <% end %>

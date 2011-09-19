@@ -1,0 +1,10 @@
+<div id="header">
+	<div id="logo">
+		<%= link_to image_tag("logo.png"), root_url %>
+	</div>
+	<div id="user_session">
+		<% if current_user.present? %>
+			<%= current_user.login %> | <%= current_user.points %> points | <%=link_to "Logout", user_session_url, :method => :delete %>
+		<% end %>
+	</div>
+</div>

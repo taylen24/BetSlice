@@ -1,5 +1,7 @@
 Website::Application.routes.draw do
 
+  resources :authorizations
+
   get "dashboard" => "homepage#dashboard"
 
   resources :bets do

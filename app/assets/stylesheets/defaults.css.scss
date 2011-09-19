@@ -1,0 +1,140 @@
+body {
+  background-color: #F7F0C8;
+  color: #333;
+  font-family: Arial;
+  font-size: 14px;
+	padding:0px;
+	margin:0px;
+}
+
+p, ol, ul, td {
+  font-family: Arial;
+  font-size: 14px;
+}
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+h1 {
+	@include linear-gradient(top, #8A6D3D 0%, #E0B66E 100%);
+	position:relative;
+	font-size:40px;
+	padding:15px 0px 15px 185px;
+	@include border-radius(15px 15px 0px 0px);
+	color:white;
+	text-shadow: 1px 1px 0.05em #753F08, 1px 0px 0.05em #fff;
+	margin:0px;
+	border-bottom: 2px solid #8A6D3D;
+}
+
+h2, h3, h4, h5, h6 {
+	margin:15px 0px 5px 0px;
+	color:#000;
+	@include linear-gradient(top,	#ffffff 0%,	#ebebeb 50%, #dbdbdb 50%, #b5b5b5 100%);
+	border: 1px solid #949494;
+	@include border-radius(10px);
+	@include box-shadow(0px 1px 3px rgba(000,000,000,0.5), inset 0px 0px 2px rgba(255,255,255,1));
+	text-shadow:0px -1px 0px rgba(000,000,000,0.2),	0px 1px 0px rgba(255,255,255,1);
+	padding:5px 10px;
+}
+
+a {
+  color: #328B00;
+	text-decoration:none;
+  &:visited {
+    color: #328B00;
+	}
+  &:hover {
+    color: #328B00;
+		text-decoration:underline;
+	}
+}
+
+div {
+  &.field, &.actions {
+    margin-bottom: 10px;
+	}
+}
+
+#notice {
+  color: green;
+}
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0px;
+    background-color: #c00;
+    color: #fff;
+	}
+  ul li {
+    font-size: 12px;
+    list-style: square;
+	}
+}
+table {
+	border-spacing:0px;
+	width:100%;
+	background-color:#D9FFBA;
+	@include border-radius(10px);
+	padding:15px;
+	margin:0px;
+	text-align:center;
+	th {
+		border-bottom:1px solid #8A6D3D;
+		background-color:#328B00;
+		color:white;
+		&:first-child {
+			@include border-radius(5px 0px 0px 0px);
+		}
+		&:last-child {
+			@include border-radius(0px 5px 0px 0px);
+		}
+	}
+	td,th {
+		padding:5px 2px;
+	}
+	tr:nth-child(even) {
+		background-color:white;
+	}
+	tr:nth-child(odd) {
+		background-color:#f3f3f3;
+	}
+	tr:hover {
+		background-color:#FAFFCC;
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

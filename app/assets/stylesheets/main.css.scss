@@ -1,0 +1,38 @@
+#page {
+	width:960px;
+	margin:0 auto;
+}
+#container {
+	background-color:#fff;
+	@include border-radius(15px 15px 0px 0px);
+	@include box-shadow(0px 5px 15px #666);
+	margin-top:80px;
+	#content {
+		padding:20px 30px;
+	}
+
+}
+#header {
+	#logo{
+		padding:10px;
+		img {
+			float:left;
+			position:relative;
+			z-index:1000;
+		}
+	}
+	#user_session {
+		float:right;
+		position:relative;
+		top:45px;
+		color:white;
+		padding: 10px 20px 50px;
+		@include linear-gradient(top,	#328B00 0%, #D9FFBA 100%);
+		@include border-radius(5px 5px 0px 0px);
+		border:2px solid white;
+		a {
+			color:white;
+			cursor:pointer;
+		}
+	}
+}

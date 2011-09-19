@@ -1,5 +1,4 @@
-<p id="notice"><%= notice %></p>
-
+<% content_for :title, "Wager ##{@wager.id}"%>
 <dl>
 			<dt>User</dt>
 	    <dd><%= @wager.user.login %></dd>

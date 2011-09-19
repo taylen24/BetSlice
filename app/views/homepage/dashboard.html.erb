@@ -1,12 +1,19 @@
-<h1>Dashboard</h1>
+<% content_for :title, 'Dashboard' %>
 
 <h2>Bets</h2>
 <table>
+	<tr>
+		<th>Bet</th>
+		<th>Wagers</th>
+		<th></th>
+		<th></th>
+	</tr>
+
 	<% current_user.bets.active.each do |bet| %>
 		<tr>
 			<td><%= link_to bet.title, bet %></td>
-			<td><%= bet.wagers.map(&:amount).inject(:+) %> total credits waged</td>
-			<td><%= link_to bet.wagers.count %> total wagers</td>
+			<td><%= bet.wagers.map(&:amount).inject(:+) || 0 %> total credits waged</td>
+			<td><%= link_to bet.wagers.count || 0 %> total wagers</td>
 			<td><%= content_tag :span, "Expired", :class => "expired" unless bet.active? %></td>
 		</tr>
 	<% end %>
@@ -17,6 +24,11 @@
 
 <h2>Active Wagers</h2>
 <table>
+	<tr>
+		<th>Bet</th>
+		<th>Wagers</th>
+		<th></th>
+	</tr>
 	<% (current_user.wagers.select{|w| w.active?}).each do |wager| %>
 		<tr>
 			<td><%= link_to wager.bet.title, wager.bet %></td>

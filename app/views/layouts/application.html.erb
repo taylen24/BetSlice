@@ -7,13 +7,15 @@
 	  <%= csrf_meta_tags %>
 	</head>
 	<body>
-		<a href="/" style="font-size:40px; width:400px; font-weight:bold; height:50px;line-height:50px;text-decoration:none;">BetSlice</a><br/>
-		<% if current_user.present? %>
-			<%= current_user.login %> | <%= current_user.points %> points | <%=link_to "Logout", user_session_url, :method => :delete %>
-		<% end %>
-
-		<div id="content">
-			<%= yield %>
+		<div id="page">
+			<%= render "layouts/application/header" %>
+			<div id="container">
+				<h1><%= yield :title %></h1>
+				<div id="content">
+					<% if notice %><p id="notice"><%= notice %></p><% end %>
+					<%= yield %>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>
